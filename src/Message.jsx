@@ -15,14 +15,14 @@ class Message extends Component {
           case "incomingNotification":
             elements.push(
               <div className="message system" key = {message.id}>
-                <b style={{color:'blue'}}>  {message.oldname} </b>  {message.content}<b style={{color:'red'}}> {message.username}  </b>
+                <b style={{color:message.oldcolor}}>  {message.oldname} </b>  {message.content}<b style={{color:message.color}}> {message.username}  </b>
               </div>
             );
             break;
           default:
           elements.push(
           <div key ={message.id}>
-              <span><b style= {{color:'red'}}>{message.username}</b> :  {message.content}
+              <span><b style= {{color:message.color}}>{message.username}</b> :  {message.content}
               </span>
           </div>
           );

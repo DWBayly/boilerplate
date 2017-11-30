@@ -11,7 +11,7 @@ function getRandomColor() {
   }
   return color;
 }
-//source for random color generator
+//source for random color generator https://stackoverflow.com/questions/1484506/random-color-generator
 
 class App extends Component {
   constructor(props){
@@ -20,8 +20,8 @@ class App extends Component {
     this.state = {
       currentUser: {name: "Bob",color: getRandomColor()}, 
       messages: [],
-      numUsers:0,
-
+      numUsers:0
+      
     }
    
   }
@@ -42,7 +42,7 @@ class App extends Component {
     this.setState({messages: updatedMessage})
   }
   addText= (message,name)=>{
-      const newMessage = {username: name, content: message, type:"postMessage"};;
+      const newMessage = {username: name,color:this.state.currentUser.color, content: message, type:"postMessage"};;
       //const messages = this.state.messages.concat(newMessage)
       // Update the state of the app component.
       // Calling setState will trigger a call to render() in App and all child components.
@@ -52,9 +52,10 @@ class App extends Component {
   }
   changeUser= (prevName,curName)=>{
     const cont = " has changed their username to ";
-    const newMessage = {username: curName,oldname:prevName, content: cont, type:"postNotification"};
+    const newcolor=getRandomColor();
+    const newMessage = {username: curName, oldcolor:this.state.currentUser.color,color:newcolor,oldname:prevName, content: cont, type:"postNotification"};
     this.sendMessage(newMessage);
-    this.setState({currentUser:{name:curName}});
+    this.setState({currentUser:{name:curName,color:newcolor}});
 
   }
   render() {
