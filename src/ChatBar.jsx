@@ -12,8 +12,7 @@ class ChatBar extends Component {
   }
   changeUser = (e) => {
     if(e.key ==='Enter'){
-
-      this.props.changeUser(e.target.value);
+      this.props.changeUser(this.props.state.currentUser.name,e.target.value);
     }
 
 

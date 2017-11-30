@@ -6,16 +6,37 @@ class Message extends Component {
   }
   render() {
     const messages = this.props.messages;
-    console.log(messages);
+    console.log(this.props.messages);
+    let elements=[];
+    messages.forEach(function each(message){
+
+      switch(message.type){
+      
+          case "incomingNotification":
+            elements.push(
+              <div className="message system" key = {message.id}>
+                <b style={{color:'blue'}}>  {message.oldname} </b>  {message.content}<b style={{color:'red'}}> {message.username}  </b>
+              </div>
+            );
+            break;
+          default:
+          elements.push(
+          <div key ={message.id}>
+              <span><b style= {{color:'red'}}>{message.username}</b> :  {message.content}
+              </span>
+          </div>
+          );
+        }
+    });
     const listItems = messages.map((message) =>
-      <div>
-      <span key ={message.id}><b>{message.username}</b> :  {message.content}
+      <div key ={message.id}>
+      <span><b>{message.username}</b> :  {message.content}
       </span>
       </div>
     );
     //console.log(listItems.toString());
     return (
-      <span>{listItems}</span>
+      <span>{elements}</span>
     );
   }
 }
