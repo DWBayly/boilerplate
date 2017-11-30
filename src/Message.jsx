@@ -2,16 +2,15 @@ import React, {Component} from 'react';
 class Message extends Component {
   constructor(props){
     super(props);
-
   }
   render() {
     const messages = this.props.messages;
     console.log(this.props.messages);
+    //create list where html elements will fit into
     let elements=[];
+    //for each message, push an html element to elements. 
     messages.forEach(function each(message){
-
-      switch(message.type){
-      
+      switch(message.type){   
           case "incomingNotification":
             elements.push(
               <div className="message system" key = {message.id}>
@@ -28,13 +27,6 @@ class Message extends Component {
           );
         }
     });
-    const listItems = messages.map((message) =>
-      <div key ={message.id}>
-      <span><b>{message.username}</b> :  {message.content}
-      </span>
-      </div>
-    );
-    //console.log(listItems.toString());
     return (
       <span>{elements}</span>
     );

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
 import Navbar from './Navbar.jsx';
-//const uuidv1 = require('uuid/v1');
 function getRandomColor() {
   var letters = '0123456789ABCDEF';
   var color = '#';
@@ -14,6 +13,7 @@ function getRandomColor() {
 //source for random color generator https://stackoverflow.com/questions/1484506/random-color-generator
 
 class App extends Component {
+  //create 
   constructor(props){
     super(props);
     this.exampleSocket = new WebSocket("ws://localhost:3001/");
@@ -23,57 +23,49 @@ class App extends Component {
       numUsers:0
       
     }
-   
   }
-  componentDidMount() {
-    //console.log("componentDidMount <App />");
-  }
+  //Update online users value
   updateCounter = (message)=>{
     this.setState({numUsers:message.val})
   }
+  //generic function to send a message to server
   sendMessage = (message)=>{  
       //console.log(message);
         this.exampleSocket.send(JSON.stringify(message)); 
   }
-  postText= (message)=>{
-    
+  //updates message list and signals new render
+  postText= (message)=>{    
     let updatedMessage = this.state.messages.concat(message);
-    console.log(updatedMessage);
     this.setState({messages: updatedMessage})
   }
+  //constructs a new message and sends it to the server
   addText= (message,name)=>{
       const newMessage = {username: name,color:this.state.currentUser.color, content: message, type:"postMessage"};;
-      //const messages = this.state.messages.concat(newMessage)
-      // Update the state of the app component.
-      // Calling setState will trigger a call to render() in App and all child components.
-      //console.log("SENDING MESSAGE");
       this.sendMessage(newMessage);
-      //this.setState({messages: messages})
   }
+  //changes the current user, and sends a new message to all server to notify call other clients of the change
+  //Stretch: change color on user name change
   changeUser= (prevName,curName)=>{
     const cont = " has changed their username to ";
     const newcolor=getRandomColor();
     const newMessage = {username: curName, oldcolor:this.state.currentUser.color,color:newcolor,oldname:prevName, content: cont, type:"postNotification"};
     this.sendMessage(newMessage);
     this.setState({currentUser:{name:curName,color:newcolor}});
-
   }
   render() {
-    //console.log(this.state);
-    //console.log("IN APP");
+    //x and y are just here to allow onmessage to have access to those functions. 
    let x = this.postText;
    let y = this.updateCounter
-   this.exampleSocket.onmessage = function (event) {
-       
+   //set up response to recieving a message from the server
+   this.exampleSocket.onmessage = function (event) {   
        const message = JSON.parse(event.data);
        if(message.type==="updateCounter"){
           y(message)
        }else{
           x(message);
        }
-       //const updatedMessages = this.state.messages.concat(newMessage);
-       //this.setState({messages: updatedMessages}); 
     }
+    //return 
     return (
     <div>
      <Navbar state = {this.state}/>
