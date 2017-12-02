@@ -2,6 +2,7 @@
 const express = require('express');
 const SocketServer = require('ws').Server;
 const uuidv1 = require('uuid/v1');
+
 // Set the port to 3001
 const PORT = 3001;
 // Create a new express server
@@ -25,7 +26,7 @@ wss.on('connection', (ws) => {
   //increment numUsers when new client is connected  
   numUsers++;
   //Broacast message to all clients to broacast
-  wss.broadcast({type:"updateCounter",val:numUsers});
+  wss.broadcast({type:"updateCounter",content:"A user has joined the channel",val:numUsers,id:uuidv1()});
   ws.on('message', function(message) {
     let data = JSON.parse(message);   
     switch(data.type){
@@ -37,8 +38,6 @@ wss.on('connection', (ws) => {
         data.content = " has changed their name to "
         break;    
       case "addUser":
-        data.type="incomingNotification";
-        data.content= " has entered the chat"
       default:
     }
     //set unique id

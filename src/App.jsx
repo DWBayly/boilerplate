@@ -26,11 +26,11 @@ class App extends Component {
   }
   //Update online users value
   updateCounter = (message)=>{
-    this.setState({numUsers:message.val})
+    let newMessage = this.state.messages.concat(message);
+    this.setState({numUsers:message.val,messages:newMessage})
   }
   //generic function to send a message to server
   sendMessage = (message)=>{  
-      //console.log(message);
         this.exampleSocket.send(JSON.stringify(message)); 
   }
   //updates message list and signals new render
@@ -55,12 +55,14 @@ class App extends Component {
   render() {
     //x and y are just here to allow onmessage to have access to those functions. 
    let x = this.postText;
-   let y = this.updateCounter
+   let y = this.updateCounter;
    //set up response to recieving a message from the server
    this.exampleSocket.onmessage = function (event) {   
        const message = JSON.parse(event.data);
        if(message.type==="updateCounter"){
           y(message)
+       }else if(message.type === "addUser"){
+
        }else{
           x(message);
        }
