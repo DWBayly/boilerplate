@@ -1,45 +1,16 @@
-React Boilerplate
-=====================
+Welcome to Chattyapp
+Project completed by David Bayly (DWBayly on github)
 
-A minimal and light dev environment for ReactJS.
+To run the app, open two terminal windows, one in boilerplate, the other inside chattyserver. 
+in each, type : npm start. 
 
-### Usage
+Navigate to http://localhost:3000/ to view chatty app. 
 
-Clone the boilerplate and create your own git repo.
+Users name defaults to bob. 
+Usernames are coloured from a randome color generation function. 
+The color changes when the user changes username. 
+Colors are Global
+Posting a message posts for all online users. 
+To change users name. 
 
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-cd react-simple-boilerplate
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
-
-Install the dependencies and start the server.
-
-```
-npm install
-npm start
-open http://localhost:3000
-```
-
-### Static Files
-
-You can store static files like images, fonts, etc in the `build` folder.
-
-For example, if you copy a file called my_image.png into the build folder you can access it using `http://localhost:3000/build/my_image.png`.
-
-### Linting
-
-This boilerplate project includes React ESLint configuration.
-
-```
-npm run lint
-```
-
-### Dependencies
-
-* React
-* Webpack
-* [babel-loader](https://github.com/babel/babel-loader)
-* [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
+TODO: Add image links 
