@@ -13,4 +13,5 @@ Colors are Global
 Posting a message posts for all online users. 
 To change users name. 
 
-TODO: Add image links 
+
+Image links added. to add an image, put "img:" before your image link and it will render it. 
