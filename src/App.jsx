@@ -60,9 +60,7 @@ class App extends Component {
    this.exampleSocket.onmessage = function (event) {   
        const message = JSON.parse(event.data);
        if(message.type==="updateCounter"){
-          y(message)
-       }else if(message.type === "addUser"){
-
+          y(message);
        }else{
           x(message);
        }
